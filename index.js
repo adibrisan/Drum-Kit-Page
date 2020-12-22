@@ -5,13 +5,14 @@ for(var i=0;i<document.querySelectorAll(".drum").length;i++){
     var buttonInnerHtml = this.innerHTML;
 
     makeSound(buttonInnerHtml);  //we take the string which is inside the button
-
+    buttonAnimation(buttonInnerHtml);
     });
 
 }
 
 document.addEventListener("keypress",function(event){ //make noise after pressing a specific key
   makeSound(event.key);  //we need the event parrameter because we need to acces the specific key
+  buttonAnimation(event.key);
 });
 
 function makeSound(key){  // we see which key we have inside the button and take the specific sound
@@ -48,4 +49,15 @@ function makeSound(key){  // we see which key we have inside the button and take
     default: console.log(key);
 
   }
+}
+
+function buttonAnimation(currentKey){
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed"); //we used classlist in order to put add or remove
+
+  setTimeout(function(){
+    activeButton.classList.remove("pressed");
+  },100);
+
 }
